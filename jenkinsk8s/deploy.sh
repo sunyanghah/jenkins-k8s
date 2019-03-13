@@ -3,7 +3,7 @@
 serverName=jenkinsk8s
 workDir=/mnt/k8sApp/$serverName
 imageRepertory=47.94.159.51/dev
-serverVersion=latest
+serverVersion=0.0.1
 
 
 

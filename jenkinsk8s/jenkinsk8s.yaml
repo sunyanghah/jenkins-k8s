@@ -14,7 +14,7 @@ spec:
       terminationGracePeriodSeconds: 60
       containers:
       - name: jenkinsk8s
-        image: 47.94.159.51/dev/jenkinsk8s_image:latest
+        image: 47.94.159.51/dev/jenkinsk8s_image:0.0.1
       imagePullSecrets:
       - name: docker-secret
 
