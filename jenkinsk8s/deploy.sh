@@ -10,11 +10,11 @@ serverVersion=latest
 imageName=jenkinsk8s_image
 
 function buildImage(){
-    docker image build -t $imageName:$serverVersion $workDir
+    docker image build --tag $imageRepertory/$imageName:$serverVersion $workDir
 }
 
 function pushImage(){
-    docker tag $imageName:$serverVersion $imageRepertory/$imageName:$serverVersion
+    #docker tag $imageName:$serverVersion $imageRepertory/$imageName:$serverVersion
     docker push $imageRepertory/$imageName:$serverVersion
 }
 
