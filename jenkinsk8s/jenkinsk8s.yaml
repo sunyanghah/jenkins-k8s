@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: jenkinsk8s
+  labels:
+    app: jenkinsk8s
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: jenkinsk8s
+    spec:
+      terminationGracePeriodSeconds: 60
+      containers:
+      - name: study-news
+        image: 47.94.159.51/dev/jenkinsk8s_image:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkinsk8s
+  labels:
+    name: jenkinsk8s
+spec:
+  ports:
+  - port: 8021
+  selector:
+    name: jenkinsk8s
