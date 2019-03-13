@@ -19,7 +19,7 @@ function pushImage(){
 }
 
 function k8sDeploy(){
-    kubectl apply -f $serverName.yaml
+    kubectl apply -f $workDir/$serverName.yaml
 }
 
 buildImage
