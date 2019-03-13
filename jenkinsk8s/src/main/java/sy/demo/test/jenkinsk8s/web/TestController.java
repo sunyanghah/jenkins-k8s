@@ -13,6 +13,6 @@ public class TestController {
 
     @GetMapping("/test")
     public RP test() throws Exception{
-        return RP.buildSuccess("ssdfsdfsfs");
+        return RP.buildSuccess("this is message","this is data");
     }
 }
