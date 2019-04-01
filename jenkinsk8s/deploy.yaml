@@ -1,0 +1,42 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: jenkinsk8s
+  labels:
+    app: jenkinsk8s
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: jenkinsk8s
+    spec:
+      terminationGracePeriodSeconds: 60
+      containers:
+      - name: jenkinsk8s
+        image: 39.105.65.204:1443/dev/jenkinsk8s_image:latest
+        imagePullPolicy: Always
+        volumeMounts:
+        - mountPath: /logs
+          name: logs-volume
+      imagePullSecrets:
+      - name: docker-secret
+      volumes:
+      - name: logs-volume
+        hostPath:
+          path: /mnt/docker_volume/jenkinsk8s
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkinsk8s
+  labels:
+    name: jenkinsk8s
+spec:
+  ports:
+  - port: 80
+    name: j-k
+    targetPort: 8021
+  selector:
+    app: jenkinsk8s
