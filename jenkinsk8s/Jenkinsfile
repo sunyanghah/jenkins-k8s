@@ -1,0 +1,40 @@
+podTemplate(label: 'jnlp-slave', cloud: 'kubernetes', serviceAccount: 'jenkins-admin', containers: [
+    containerTemplate(
+        name: 'jnlp',
+        image: '39.105.65.204:1443/dev/jenkins-slave:latest',
+        alwaysPullImage: false
+        ),
+    ],
+    volumes: [
+        hostPathVolume(mountPath: '/root/jenkins/',hostPath: '/mnt/docker_volume/jenkins4k8s/jenkins_home_slave'),
+        hostPathVolume(mountPath: '/root/.m2/repository',hostPath: '/mnt/docker_volume/jenkins4k8s/maven_repo'),
+        hostPathVolume(mountPath: '/usr/bin/docker',hostPath: '/usr/bin/docker'),
+        hostPathVolume(mountPath: '/var/run/docker.sock',hostPath: '/var/run/docker.sock')
+        ],
+    imagePullSecrets: ['docker-secret']
+    )
+{
+    node ('jnlp-slave') {
+        stage('checkout') {
+          checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/sunyanghah/jenkins-k8s.git']]])
+        }
+        stage("maven build") {
+            sh '/data/maven/apache-maven-3.5.4/bin/mvn clean package -Dmaven.test.skip=true'
+        }
+        stage("image build and push") {
+            sh '''
+            cd jenkinsk8s
+            ls -la
+            docker image build -t 39.105.65.204:1443/dev/jenkinsk8s_image:latest .
+            docker login -u admin -p Harbor12345 39.105.65.204:1443
+            docker push 39.105.65.204:1443/dev/jenkinsk8s_image:latest
+            '''
+
+        }
+        stage("k8s deploy") {
+            sh '''
+            kubectl apply -f jenkinsk8s/deploy.yaml
+            '''
+        }
+    }
+}
