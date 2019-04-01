@@ -4,7 +4,9 @@ MAINTAINER jenkinsk8s
 RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 RUN echo "Asia/shanghai" > /etc/timezone
 
-ADD jenkins/target/jenkinsk8s-0.0.1.jar /app/jenkinsk8s.jar
+RUN ls -l
+
+ADD ./jenkins/target/jenkinsk8s-0.0.1.jar /app/jenkinsk8s.jar
 
 EXPOSE 8082
 
