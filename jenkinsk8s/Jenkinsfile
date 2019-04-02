@@ -6,7 +6,7 @@ podTemplate(label: 'jnlp-slave', cloud: 'kubernetes', serviceAccount: 'jenkins-a
         ),
     ],
     volumes: [
-        hostPathVolume(mountPath: '/root/jenkins/',hostPath: '/mnt/docker_volume/jenkins4k8s/jenkins_home_slave'),
+        hostPathVolume(mountPath: '/home/jenkins/',hostPath: '/mnt/docker_volume/jenkins4k8s/jenkins_home_slave'),
         hostPathVolume(mountPath: '/root/.m2/repository',hostPath: '/mnt/docker_volume/jenkins4k8s/maven_repo'),
         hostPathVolume(mountPath: '/usr/bin/docker',hostPath: '/usr/bin/docker'),
         hostPathVolume(mountPath: '/var/run/docker.sock',hostPath: '/var/run/docker.sock')
