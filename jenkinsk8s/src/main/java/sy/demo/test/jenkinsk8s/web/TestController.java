@@ -18,7 +18,7 @@ public class TestController {
     @GetMapping("/test")
     public RP test() throws Exception{
         log.info("---------------------test--test---test----------------------------");
-        return RP.buildSuccess("this is message","this is data");
+        return RP.buildSuccess("this is message 2222222222222222","this is data 2222222222222222222");
     }
 
     @PutMapping("/test/{id}")
