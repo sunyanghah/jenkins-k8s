@@ -2,7 +2,7 @@ podTemplate(label: 'jnlp-slave', cloud: 'kubernetes', serviceAccount: 'jenkins-a
     containerTemplate(
         name: 'jnlp',
         image: '39.105.65.204:1443/dev/jenkins-slave:latest',
-        alwaysPullImage: false
+        alwaysPullImage: true
         ),
     ],
     volumes: [
