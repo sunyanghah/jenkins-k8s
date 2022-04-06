@@ -6,6 +6,9 @@ metadata:
   labels:
     app: jenkinsk8s
 spec:
+  selector:
+    matchLabels:
+      app: jenkinsk8s
   replicas: 1
   template:
     metadata:
