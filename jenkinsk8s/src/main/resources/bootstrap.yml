@@ -1,5 +1,0 @@
-spring:
-  application:
-    name: jenkinsk8s
-  profiles:
-    active: dev
