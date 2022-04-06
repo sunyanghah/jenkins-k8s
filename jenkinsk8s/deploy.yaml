@@ -15,17 +15,17 @@ spec:
       terminationGracePeriodSeconds: 60
       containers:
       - name: jenkinsk8s
-        image: 39.105.65.204:1443/dev/jenkinsk8s_image:latest
+        image: 192.168.152.128/dev/jenkinsk8s_image:latest
         imagePullPolicy: Always
         volumeMounts:
         - mountPath: /logs
           name: logs-volume
       imagePullSecrets:
-      - name: docker-secret
+      - name: mysecret
       volumes:
       - name: logs-volume
         hostPath:
-          path: /mnt/docker_volume/jenkinsk8s
+          path: /opt/kubernetes/volume/jenkinsk8s
 ---
 apiVersion: v1
 kind: Service
